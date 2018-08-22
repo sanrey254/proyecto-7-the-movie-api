@@ -1,16 +1,16 @@
 
 window.getData = (search, page) => {
     fetch(`http://www.omdbapi.com/?apikey=add73b1a&s=${search}&page=${page}`)
-    .then(response => response.json())
-    .then(response =>{
-        drawDataBySearch(response);
-    })
-    .catch(error =>{
-        console.log('Error', error);
-    })
+        .then(response => response.json())
+        .then(response => {
+            drawDataBySearch(response);
+        })
+        .catch(error => {
+            console.log('Error', error);
+        })
 }
 
-document.getElementById('search-string-button').addEventListener('click', event =>{
+document.getElementById('search-string-button').addEventListener('click', event => {
     event.preventDefault();
     let searchString = document.getElementById('search-string').value;
     let newSearchString = searchString.replace(' ', '+');
@@ -18,15 +18,15 @@ document.getElementById('search-string-button').addEventListener('click', event 
     document.getElementById('search-string').value = '';
 })
 
-window.drawDataBySearch = (dataArray) =>{
+window.drawDataBySearch = (dataArray) => {
     let result = '';
     let poster = '';
     //console.log(dataArray.totalResults)
     dataArray.Search.forEach(data => {
         let type = getTypeBage(data.Type);
-        if(data.Poster === 'N/A'){
+        if (data.Poster === 'N/A') {
             poster = 'img/no-poster.jpg';
-        }else{
+        } else {
             poster = data.Poster;
         }
         result += `<div class="col-6 col-sm-4 col-md-3 col-lg-3 my-3">
@@ -45,21 +45,21 @@ window.drawDataBySearch = (dataArray) =>{
     document.getElementById('dataGrid').innerHTML = result;
 }
 
-window.getTypeBage = (type) =>{
+window.getTypeBage = (type) => {
     let result = '';
-    if(type === 'movie'){
+    if (type === 'movie') {
         result = `<span class="badge badge-warning"><i class="fas fa-film"></i> Película</span>`;
     }
-    if(type === 'series'){
+    if (type === 'series') {
         result = `<span class="badge badge-success"><i class="fas fa-tv"></i> Serie</span>`;
     }
-    if(type === 'game'){
+    if (type === 'game') {
         result = `<span class="badge badge-info"><i class="fas fa-gamepad"></i> Videojuego</span>`;
     }
     return result;
 }
 
-window.getDetails = (imdbID) =>{
+window.getDetails = (imdbID) => {
     console.log(imdbID);
     fetch(`http://www.omdbapi.com/?apikey=add73b1a&i=${imdbID}`)
         .then(response => response.json())
@@ -71,7 +71,7 @@ window.getDetails = (imdbID) =>{
         });
 }
 
-window.drawDataDetails = (dataArray) =>{
+window.drawDataDetails = (dataArray) => {
     console.log(dataArray);
     const card = `<div class="container pl-4">
     <div class="card">
@@ -91,5 +91,5 @@ window.drawDataDetails = (dataArray) =>{
         confirmButtonText: 'Cerrar',
         backdrop: `rgba(24, 24, 36, 0.92)`
     })
-    
+
 }
