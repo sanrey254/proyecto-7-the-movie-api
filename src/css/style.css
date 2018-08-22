@@ -1,5 +1,9 @@
 body{
-    font-family: 'PT Sans Narrow', sans-serif;	
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+b, strong {
+    font-weight: 700;
 }
 
 .bg{
@@ -15,26 +19,42 @@ body{
 	background-color: #f0f0f0;
 }
 
-.card-title{
-	color: #4aaefb;
-}
-
 .badge{
 	font-size: 100%;
 }
 .card-title{
 	font-size: 1.3rem;
 	border:none;
+	color: #4aaefb;
+	font-weight: 700;
+}
+
+.card-title-details{
+	font-size: 1.1rem;
+	border:none;
+	color: #4aaefb;
+}
+
+.card-text-details{
+	font-size: 0.9rem;
 }
 
 .height-img{
     height: 350px;
 }
 
+.img-card{
+	height: 350px;
+}
+.no-radius{
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
 .no-btn{
 	background-color: inherit;
 	border: none;
 	color: #fff;
+	cursor: pointer;
 }
 
 .btn-group-danger .dropdown-menu {
@@ -43,4 +63,15 @@ body{
 .btn-group-danger .dropdown-menu li > a:hover,
 .btn-group-danger .dropdown-menu li > a:focus {
   background-color: #d9534f !important;
+}
+
+.form-control{
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+
+
+.small-text{
+	font-size: 80%;
 }

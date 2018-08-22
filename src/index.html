@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Time to Series & Movies</title>
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
@@ -27,16 +27,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto mr-4">
-                    <a class="nav-item nav-link active" href="#">Iniciar Sesión</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <section class="my-4">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
+                    <form class="form-inline mr-3">
+                        <input class="form-control" placeholder="Buscar" aria-label="Search" id="search-string">
+                        <button class="btn btn-danger no-radius" id="search-string-button"><i class="fas fa-search"></i></button>
+                    </form>
                     <div class="btn-group btn-group-danger">
                         <button class="btn btn-danger" type="button">Colecciones</button>
                         <button data-toggle="dropdown" class="btn btn-danger dropdown-toggle" type="button"><span class="caret"></span>
@@ -55,13 +49,13 @@
                             <li><button onclick="getData('Final+Destination',1)" class="no-btn">Destino final</button></li>
                         </ul>
                     </div>
+                    <button class="btn btn-danger ml-3">Iniciar Sesión</button>
                 </div>
             </div>
-        </div>  
-    </section>
-
+        </nav>
+    </header>
     <section>
-        <div class="container-fluid">
+        <div class="container-fluid mt-2">
             <div class="row" id="dataGrid">
             </div>
         </div>
@@ -74,6 +68,7 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
     <script src="js/data.js"></script>
 </body>
 </html>
