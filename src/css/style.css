@@ -1,3 +1,46 @@
 body{
-    background-color: beige;
+    font-family: 'PT Sans Narrow', sans-serif;	
+}
+
+.bg{
+    background-image: url("../img/bg2.gif");
+	background-repeat: repeat;
+}
+
+.back-white{
+    background-color: #fbfff2!important;
+}
+
+.card{
+	background-color: #f0f0f0;
+}
+
+.card-title{
+	color: #4aaefb;
+}
+
+.badge{
+	font-size: 100%;
+}
+.card-title{
+	font-size: 1.3rem;
+	border:none;
+}
+
+.height-img{
+    height: 350px;
+}
+
+.no-btn{
+	background-color: inherit;
+	border: none;
+	color: #fff;
+}
+
+.btn-group-danger .dropdown-menu {
+  background-color: #d64742 !important;
+}
+.btn-group-danger .dropdown-menu li > a:hover,
+.btn-group-danger .dropdown-menu li > a:focus {
+  background-color: #d9534f !important;
 }
