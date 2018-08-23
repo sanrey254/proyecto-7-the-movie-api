@@ -37,7 +37,7 @@ window.drawData = (dataArray) => {
                             <h4 class="card-title">${data.Title}</h4>
                             <div class="row">
                             <div class="col-md-6"><p class="card-text">${type}</p></div>
-                            <div class="col-md-6"><span class="badge badge-dark"><i class="fas fa-info-circle"></i><button class="no-btn" onclick="getDetails('${data.imdbID}')">Detalles</button></span></div>
+                            <div class="col-md-6"><span class="badge badge-dark"><i class="fas fa-info-circle"></i><button class="no-btn text-white" onclick="getDetails('${data.imdbID}')">Detalles</button></span></div>
                             </div>
 					    </div>
 					</div>
@@ -120,7 +120,7 @@ window.getMoviesTop = () =>{
                             <h4 class="card-title">${data.Title}</h4>
                             <div class="row">
                             <div class="col-md-6"><p class="card-text">${type}</p></div>
-                            <div class="col-md-6"><span class="badge badge-dark"><i class="fas fa-info-circle"></i><button class="no-btn" onclick="getDetails('${data.imdbID}')">Detalles</button></span></div>
+                            <div class="col-md-6"><span class="badge badge-dark"><i class="fas fa-info-circle"></i><button class="no-btn text-white" onclick="getDetails('${data.imdbID}')">Detalles</button></span></div>
                             </div>
 					    </div>
 					</div>
