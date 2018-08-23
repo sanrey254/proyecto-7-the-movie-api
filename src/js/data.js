@@ -3,11 +3,11 @@ window.getData = (search, page) => {
     fetch(`https://www.omdbapi.com/?apikey=add73b1a&s=${search}&page=${page}`)
         .then(response => response.json())
         .then(response => {
-            drawDataBySearch(response);
+            drawData(response.Search);
         })
         .catch( () => {
             console.log('Error');
-            document.getElementById('dataGrid').innerHTML = `<div class="mt-5 text-center"><img src="img/no-result.png"class="img-fluid"></div>`;
+            document.getElementById('dataGrid').innerHTML = `<div class="mt-5 px-3 px-md-0 mx-auto"><img src="img/no-result.png"class="img-fluid"></div>`;
         })
 }
 
@@ -19,10 +19,11 @@ document.getElementById('search-string-button').addEventListener('click', event 
     document.getElementById('search-string').value = '';
 })
 
-window.drawDataBySearch = (dataArray) => {
+window.drawData = (dataArray) => {
     let result = '';
     let poster = '';
-    dataArray.Search.forEach(data => {
+    //console.log(typeof(dataArray));
+    dataArray.forEach(data => {
         let type = getTypeBage(data.Type);
         if (data.Poster === 'N/A') {
             poster = 'img/no-poster.jpg';
@@ -64,7 +65,7 @@ window.getDetails = (imdbID) => {
     fetch(`https://www.omdbapi.com/?apikey=add73b1a&i=${imdbID}`)
         .then(response => response.json())
         .then(response => {
-            drawDataDetails(response)
+            drawDataDetails(response);
         })
         .catch(error => {
             console.log('Error', error);
@@ -97,3 +98,40 @@ window.drawDataDetails = (dataArray) => {
     })
 
 }
+
+window.getMoviesTop = () =>{
+    const topMovies = ['tt1677720', 'tt4154756', 'tt5463162', 'tt3606756', 'tt1825683','tt5104604', 'tt5095030', 'tt6911608', 'tt5164214', 'tt4881806', 'tt4073790', 'tt6133466'];
+    //let topMoviesImdbID = new Array;
+    let result = '';
+    topMovies.forEach((element, i) =>{
+        fetch(`https://www.omdbapi.com/?apikey=add73b1a&i=${element}`)
+            .then(response => response.json())
+            .then(data => {
+                let type = getTypeBage(data.Type);
+                if (data.Poster === 'N/A') {
+                    poster = 'img/no-poster.jpg';
+                } else {
+                    poster = data.Poster;
+                }
+                result += `<div class="col-6 col-sm-4 col-md-3 col-lg-3 my-3">
+					<div class="card hoverable">
+					    <img class="img-fluid height-img" src="${poster}">
+					    <div class="card-body">
+                            <h4 class="card-title">${data.Title}</h4>
+                            <div class="row">
+                            <div class="col-md-6"><p class="card-text">${type}</p></div>
+                            <div class="col-md-6"><span class="badge badge-dark"><i class="fas fa-info-circle"></i><button class="no-btn" onclick="getDetails('${data.imdbID}')">Detalles</button></span></div>
+                            </div>
+					    </div>
+					</div>
+                </div>`; 
+                document.getElementById('dataGrid').innerHTML = result;
+            })
+            .catch(error => {
+                console.log('Error', error);
+            });
+    })
+    //drawData(topMoviesImdbID);
+}
+
+getMoviesTop();
