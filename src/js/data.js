@@ -1,12 +1,13 @@
 
 window.getData = (search, page) => {
-    fetch(`http://www.omdbapi.com/?apikey=add73b1a&s=${search}&page=${page}`)
+    fetch(`https://www.omdbapi.com/?apikey=add73b1a&s=${search}&page=${page}`)
         .then(response => response.json())
         .then(response => {
             drawDataBySearch(response);
         })
-        .catch(error => {
-            console.log('Error', error);
+        .catch( () => {
+            console.log('Error');
+            document.getElementById('dataGrid').innerHTML = `<div class="mt-5 text-center"><img src="img/no-result.png"class="img-fluid"></div>`;
         })
 }
 
@@ -21,7 +22,6 @@ document.getElementById('search-string-button').addEventListener('click', event 
 window.drawDataBySearch = (dataArray) => {
     let result = '';
     let poster = '';
-    //console.log(dataArray.totalResults)
     dataArray.Search.forEach(data => {
         let type = getTypeBage(data.Type);
         if (data.Poster === 'N/A') {
@@ -61,7 +61,7 @@ window.getTypeBage = (type) => {
 
 window.getDetails = (imdbID) => {
     console.log(imdbID);
-    fetch(`http://www.omdbapi.com/?apikey=add73b1a&i=${imdbID}`)
+    fetch(`https://www.omdbapi.com/?apikey=add73b1a&i=${imdbID}`)
         .then(response => response.json())
         .then(response => {
             drawDataDetails(response)
@@ -72,11 +72,15 @@ window.getDetails = (imdbID) => {
 }
 
 window.drawDataDetails = (dataArray) => {
-    console.log(dataArray);
+    if (dataArray.Poster === 'N/A') {
+        poster = 'img/no-poster.jpg';
+    } else {
+        poster = dataArray.Poster;
+    }
     const card = `<div class="container pl-4">
     <div class="card">
       <div class="row ">
-        <div class="col-md-6 px-0"><img src="${dataArray.Poster}" class="img-fluid img-card"></div>
+        <div class="col-md-6 px-0"><img src="${poster}" class="img-fluid img-card"></div>
           <div class="col-md-6 pl-0"><div class="card-block p-3 text">
               <h4 class="card-title-details text-center">${dataArray.Title}</h4>
               <div class="text-left">
