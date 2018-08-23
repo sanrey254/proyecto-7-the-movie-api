@@ -1,0 +1,29 @@
+{
+  "name": "proyecto-7-the-movie-api",
+  "version": "1.0.0",
+  "description": "Has decidido entrar a una startup que se relaciona con la industria cinematográfica. Tienes una entrevista técnica en dos días y por ello, decides \r crear un blog para reforzar tu portafolio enfocado a este sector.",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint --ext .js src/",
+    "pretest": "npm run eslint && npm run htmlhint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanrey254/proyecto-7-the-movie-api.git"
+  },
+  "keywords": [],
+  "author": "Brenda Paola Sánchez Reyes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanrey254/proyecto-7-the-movie-api/issues"
+  },
+  "homepage": "https://github.com/sanrey254/proyecto-7-the-movie-api#readme",
+  "dependencies": {
+    "eslint": "^5.4.0",
+    "htmlhint": "^0.9.13"
+  }
+}
