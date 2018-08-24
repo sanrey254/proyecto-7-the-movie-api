@@ -6,70 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Time to Series & Movies</title>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
             crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="css/helperClasses.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/media.css">
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
 <body class="bg">
     <header>
-        <nav class="navbar navbar-expand-md navbar-light back-white">
-            <a class="navbar-brand" href="index.html">
-                <img src="img/logo2.png" width="200" class="img-fluid">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        
-            <div class="collapse navbar-collapse" id="navbarsExample04">
-                <form class="form-inline my-2 my-md-0 ml-auto mr-md-3 mr-0">
-                    <input class="form-control w-80" type="text" placeholder="Buscar" id="search-string">
-                    <button class="btn btn-danger no-radius" id="search-string-button"><i class="fas fa-search"></i></button>
-                </form>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown mx-md-3 mx-0">
-                        <a class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">Colecciones</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown">
-                            <a class="dropdown-item"><button onclick="getData('harry+potter',1)" class="no-btn">Harry Potter</button></a>
-                            <a class="dropdown-item"><button onclick="getData('lord+of+the+rings',1)" class="no-btn">Señor de los anillos</button></a>
-                            <a class="dropdown-item"><button onclick="getData('x-men',1)" class="no-btn">X-men</button></a>
-                            <a class="dropdown-item"><button onclick="getData('star+wars',1)" class="no-btn">Stars Wars</button></a>
-                            <a class="dropdown-item"><button onclick="getData('pirates+of+the+Caribbean',1)" class="no-btn">Piratas del caribe</button></a>
-                            <a class="dropdown-item"><button onclick="getData('scream',1)" class="no-btn">Sream</button></a>
-                            <a class="dropdown-item"><button onclick="getData('batman',1)" class="no-btn">Batman</button></a>
-                            <a class="dropdown-item"><button onclick="getData('superman',1)" class="no-btn">Superman</button></a>
-                            <a class="dropdown-item"><button onclick="getData('back+to+the+future',1)" class="no-btn">Volver al futuro</button></a>
-                            <a class="dropdown-item"><button onclick="getData('Final+Destination',1)" class="no-btn">Destino final</button></a>
-                            <a class="dropdown-item"><button onclick="getData('spider+man',1)" class="no-btn">Spiderman</button></a>
-                        </div>
-                    </li>
-                    <li class="nav-item active mx-md-3 mx-0">
-                        <a class="nav-link"><button class="no-btn">Inciar Sesión</button></a>
-                    </li>
+        <!-- Dropdown Structure -->
+        <ul id="dropdownColecciones" class="dropdown-content">
+            <li><a><button onclick="getData('harry+potter',1)" class="no-btn">Harry Potter</button></a></li>
+            <li><a><button onclick="getData('x-men',1)" class="no-btn">X-men</button></a></li>
+            <li><a><button onclick="getData('spider+man',1)" class="no-btn">Spiderman</button></a></li>
+            <li><a><button onclick="getData('superman',1)" class="no-btn">Superman</button></a></li>
+            <li><a><button onclick="getData('star+wars',1)" class="no-btn">Stars Wars</button></a></li>
+            <li><a><button onclick="getData('lord+of+the+rings',1)" class="no-btn">The Lord of the rings</button></a></li>
+        </ul>
+        <nav class="nav-extended back-white">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo ml-md-4 mt-2 ml-0"><img src="img/logo2.png" width="200" class="responsive-img"></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons blue-grey-text text-darken-4">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a class="dropdown-trigger blue-grey-text text-darken-4 " data-target="dropdownColecciones">Sagas<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a href="#" class="blue-grey-text text-darken-4">Login</a></li>
+                </ul>
+            </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent ">
+                    <li class="tab"><a href="#moviesGrid" class="active blue-grey-text text-darken-4 lowerCase">Top Movies</a></li>
+                    <li class="tab"><a class="blue-grey-text text-darken-4 lowerCase" href="#seriesGrid">Top Series</a></li>
                 </ul>
             </div>
         </nav>
+        
+        <ul class="sidenav" id="mobile-demo">
+            <li class="sidenav-close"><a>Sagas</a></li>
+            <li class="sidenav-close"><a href="#">Login</a></li>
+        </ul>
     </header>
     
     <section>
-        <div class="container-fluid mt-2">
-            <div class="row" id="dataGrid">
-            </div>
-        </div>
+        <div class="row mt-3" id="dataGrid"></div>
     </section>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+    <section>
+        <div class="row mt-3" id="moviesGrid"></div>
+    </section>
+    <section>
+        <div class="row mt-3" id="seriesGrid"></div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
     <script src="js/data.js"></script>
+    <script>
+        // Inicialización de componentes de Materialize
+        document.addEventListener('DOMContentLoaded', () => {
+                M.AutoInit();});
+    </script>
 </body>
 </html>

@@ -1,9 +1,17 @@
-body{
-    font-family: 'Josefin Sans', sans-serif;
+
+button:focus{
+	background-color: inherit;
+}
+nav ul a:hover{
+	background-color: inherit;
 }
 
-b, strong {
-    font-weight: 700;
+.tabs .tab a:hover, .tabs .tab a.active, .tabs .tab a:focus, .tabs .tab a:focus.active {
+	background-color: #b9b9b9cc;
+}
+
+.lowerCase{
+	text-transform: capitalize;
 }
 
 .bg{
@@ -15,36 +23,22 @@ b, strong {
     background-color: #fbfff2!important;
 }
 
-.card{
-	background-color: #f0f0f0;
+
+.card-action-text{
+	font-size: 0.85em;
+	text-align: left;
 }
 
 .badge{
 	font-size: 85%;
 }
-.card-title{
-	font-size: 1em;
-	border:none;
-	color: #4aaefb;
-	font-weight: 700;
-}
-
-.card-title-details{
-	font-size: 0.95em;
-	border:none;
-	color: #4aaefb;
-}
-
-.card-text-details{
-	font-size: 0.8em;
-}
 
 .height-img{
-    height: 350px;
+    height: 400px;
 }
 
 .img-card{
-	height: 350px;
+	height: 100px;
 }
 .no-radius{
 	border-top-left-radius: 0;
@@ -55,19 +49,6 @@ b, strong {
 	border: none;
 	color: #000;
 	cursor: pointer;
-}
-
-.btn-group-danger .dropdown-menu {
-  background-color: #d64742 !important;
-}
-.btn-group-danger .dropdown-menu li > a:hover,
-.btn-group-danger .dropdown-menu li > a:focus {
-  background-color: #d9534f !important;
-}
-
-.form-control{
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
 }
 
 .small-text{
