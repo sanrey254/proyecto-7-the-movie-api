@@ -6,8 +6,12 @@ nav ul a:hover{
 	background-color: inherit;
 }
 
-.tabs .tab a:hover, .tabs .tab a.active, .tabs .tab a:focus, .tabs .tab a:focus.active {
+.nav-content{
 	background-color: #b9b9b9cc;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active, .tabs .tab a:focus, .tabs .tab a:focus.active {
+	background-color: #a5a2a2cc;
 }
 
 .lowerCase{
@@ -23,6 +27,9 @@ nav ul a:hover{
     background-color: #fbfff2!important;
 }
 
+.card{
+	min-height: 560px;
+}
 
 .card-action-text{
 	font-size: 0.85em;
@@ -53,4 +60,17 @@ nav ul a:hover{
 
 .small-text{
 	font-size: 75%;
+}
+
+input[type="text"]:not(.browser-default):focus:not([readonly]){
+	border-bottom: 1px solid #394847;
+	box-shadow: 0 1px 0 0 #1f2121;
+}
+
+input[type="text"]:not(.browser-default){
+	height: 2rem;
+}
+
+.hoverable:hover {
+    box-shadow: 0 8px 17px 0 rgba(255, 255, 255, 0.06),0 6px 20px 0 rgba(252, 249, 249, 0.36);
 }

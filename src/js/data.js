@@ -7,21 +7,21 @@ window.getData = (search, page) => {
     })
     .catch(() => {
       console.log('Error');
-      document.getElementById('moviesGrid').innerHTML = '';
-      document.getElementById('dataGrid').innerHTML = '<div class="mt-5 px-3 px-md-0 mx-auto"><img src="img/no-result.png"class="img-fluid"></div>';
+      document.getElementById('dataGrid').innerHTML = '<div class="col offset-s4 s6"><img src="img/no-result.png" class="responsive-img mt-5"></div>';
     });
 };
 
-/* document.getElementById('search-string-button').addEventListener('click', event => {
+document.getElementById('search-string').addEventListener('keyup', event => {
   event.preventDefault();
-  let searchString = document.getElementById('search-string').value;
-  let newSearchString = searchString.replace(' ', '+');
-  getData(newSearchString, 1);
-  document.getElementById('search-string').value = '';
-}); */
+  if (event.keyCode === 13) {
+    let searchString = document.getElementById('search-string').value;
+    let newSearchString = searchString.replace(' ', '+');
+    getData(newSearchString, 1);
+    document.getElementById('search-string').value = '';
+  }
+});
 
 window.drawData = (dataArray) => {
-  
   let result = '';
   let poster = '';
   // console.log(typeof(dataArray));
@@ -38,13 +38,12 @@ window.drawData = (dataArray) => {
             <a class="btn-floating halfway-fab waves-effect waves-light red" onclick="getDetails('${data.imdbID}')"><i class="material-icons">speaker_notes</i></a>
           </div>
           <div class="card-content">
-            <p><b>${data.Title}<b></p>
+            <p><b>${data.Title}</b></p>
           </div>
           <div class="card-action">
             ${type}
           </div></div></div>`;
   });
-  document.getElementById('moviesGrid').innerHTML = '';
   document.getElementById('dataGrid').innerHTML = result;
 };
 
@@ -81,7 +80,7 @@ window.drawDataDetails = (dataArray) => {
     poster = dataArray.Poster;
   }
   const card = `<div class="row">
-  <div class=""><h4>${dataArray.Title}</h4></div>
+  <div><h4>${dataArray.Title}</h4></div>
   <div class="col s5">
   <div class="mt-4"><img class="responsive-img" src="${poster}"></div>
   </div>
@@ -115,18 +114,18 @@ window.getMoviesTop = () => {
         } else {
           poster = data.Poster;
         }
-        result += `<div class="col offset-s1 s10 m6 l3"><div class="card">
+        result += `<div class="col offset-s1 s10 m6 l3"><div class="card hoverable">
           <div class="card-image">
             <img class="height-img" src="${poster}">
             <a class="btn-floating halfway-fab waves-effect waves-light red" onclick="getDetails('${data.imdbID}')"><i class="material-icons">speaker_notes</i></a>
           </div>
           <div class="card-content">
-            <p><b>${data.Title}<b></p>
+            <p><b>${data.Title}</b></p>
           </div>
           <div class="card-action">
             ${type}
           </div></div></div>`;
-        document.getElementById('moviesGrid').innerHTML = result;
+        document.getElementById('dataGrid').innerHTML = result;
       })
       .catch(error => {
         console.log('Error', error);

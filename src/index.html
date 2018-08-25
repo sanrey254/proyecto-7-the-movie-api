@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,14 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-            crossorigin="anonymous">
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link rel="stylesheet" href="css/helperClasses.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/media.css">
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
+
 <body class="bg">
     <header>
         <!-- Dropdown Structure -->
@@ -28,35 +30,31 @@
         </ul>
         <nav class="nav-extended back-white">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo ml-md-4 mt-2 ml-0"><img src="img/logo2.png" width="200" class="responsive-img"></a>
+                <a href="index.html" class="brand-logo ml-md-4 mt-2 ml-0"><img src="img/logo2.png" width="200" class="responsive-img"></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons blue-grey-text text-darken-4">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a class="dropdown-trigger blue-grey-text text-darken-4 " data-target="dropdownColecciones">Sagas<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li>
+                        <div id="topbarsearch">
+                            <div class="input-field col s6 blue-grey-text text-darken-4">
+                                <i class="blue-grey-text text-darken-4 material-icons prefix">search</i>
+                                <input type="text" placeholder="search" class="blue-grey-text text-darken-4" id="search-string">
+                            </div>
+                        </div>
+                    </li>
+                    <li><a class="dropdown-trigger blue-grey-text text-darken-4" data-target="dropdownColecciones">Sagas<i
+                                class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a href="#" class="blue-grey-text text-darken-4">Login</a></li>
                 </ul>
             </div>
-            <div class="nav-content">
-                <ul class="tabs tabs-transparent ">
-                    <li class="tab"><a href="#moviesGrid" class="active blue-grey-text text-darken-4 lowerCase">Top Movies</a></li>
-                    <li class="tab"><a class="blue-grey-text text-darken-4 lowerCase" href="#seriesGrid">Top Series</a></li>
-                </ul>
-            </div>
         </nav>
-        
         <ul class="sidenav" id="mobile-demo">
             <li class="sidenav-close"><a>Sagas</a></li>
             <li class="sidenav-close"><a href="#">Login</a></li>
         </ul>
     </header>
-    
+
     <section>
         <div class="row mt-3" id="dataGrid"></div>
-    </section>
-    <section>
-        <div class="row mt-3" id="moviesGrid"></div>
-    </section>
-    <section>
-        <div class="row mt-3" id="seriesGrid"></div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
@@ -64,7 +62,9 @@
     <script>
         // Inicialización de componentes de Materialize
         document.addEventListener('DOMContentLoaded', () => {
-                M.AutoInit();});
+            M.AutoInit();
+        });
     </script>
 </body>
+
 </html>
