@@ -48,7 +48,19 @@
             </div>
         </nav>
         <ul class="sidenav" id="mobile-demo">
-            <li class="sidenav-close"><a>Sagas</a></li>
+            <li class="sidenav-close"><a>Sagas</a>
+                <ul>
+                    <li class="divider"></li>
+                    <li><a><button onclick="getData('harry+potter',1)" class="no-btn">Harry Potter</button></a></li>
+                    <li><a><button onclick="getData('x-men',1)" class="no-btn">X-men</button></a></li>
+                    <li><a><button onclick="getData('spider+man',1)" class="no-btn">Spiderman</button></a></li>
+                    <li><a><button onclick="getData('superman',1)" class="no-btn">Superman</button></a></li>
+                    <li><a><button onclick="getData('star+wars',1)" class="no-btn">Stars Wars</button></a></li>
+                    <li><a><button onclick="getData('lord+of+the+rings',1)" class="no-btn">The Lord of the rings</button></a></li>
+                    <li class="divider"></li>
+                </ul>
+            
+            </li>
             <li class="sidenav-close"><a href="#">Login</a></li>
         </ul>
     </header>
