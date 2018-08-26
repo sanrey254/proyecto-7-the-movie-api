@@ -5,9 +5,9 @@ window.getData = (search, page) => {
     .then(response => {
       drawData(response.Search);
     })
-    .catch(() => {
-      console.log('Error');
-      document.getElementById('dataGrid').innerHTML = '<div class="col offset-s4 s6"><img src="img/no-result.png" class="responsive-img mt-5"></div>';
+    .catch((error) => {
+      console.log('Error', error);
+      document.getElementById('searchResult').innerHTML = '<div class="col offset-s4 s6"><img src="img/no-result.png" class="responsive-img mt-5"></div>';
     });
 };
 
@@ -16,6 +16,8 @@ document.getElementById('search-string').addEventListener('keyup', event => {
   if (event.keyCode === 13) {
     let searchString = document.getElementById('search-string').value;
     let newSearchString = searchString.replace(' ', '+');
+    document.getElementById('movieTap').classList.remove('active');
+    document.getElementById('serieTap').classList.remove('active');
     getData(newSearchString, 1);
     document.getElementById('search-string').value = '';
   }
@@ -24,7 +26,6 @@ document.getElementById('search-string').addEventListener('keyup', event => {
 window.drawData = (dataArray) => {
   let result = '';
   let poster = '';
-  // console.log(typeof(dataArray));
   dataArray.forEach(data => {
     let type = getTypeBage(data.Type);
     if (data.Poster === 'N/A') {
@@ -44,7 +45,9 @@ window.drawData = (dataArray) => {
             ${type}
           </div></div></div>`;
   });
-  document.getElementById('dataGrid').innerHTML = result;
+  document.getElementById('topMovies').style.display = 'none';
+  document.getElementById('topSeries').style.display = 'none';
+  document.getElementById('searchResult').innerHTML = result;
 };
 
 window.getTypeBage = (type) => {
@@ -100,11 +103,9 @@ window.drawDataDetails = (dataArray) => {
   });
 };
 
-window.getMoviesTop = () => {
-  const topMovies = ['tt1677720', 'tt4154756', 'tt5463162', 'tt3606756', 'tt1825683', 'tt5104604', 'tt5095030', 'tt6911608', 'tt5164214', 'tt4881806', 'tt4073790', 'tt6133466'];
-  // let topMoviesImdbID = new Array;
+window.drawMoviesAndSeriesTop = (topArray, typeOfSearch) => {
   let result = '';
-  topMovies.forEach((element, i) => {
+  topArray.forEach((element, i) => {
     fetch(`https://www.omdbapi.com/?apikey=add73b1a&i=${element}`)
       .then(response => response.json())
       .then(data => {
@@ -125,13 +126,26 @@ window.getMoviesTop = () => {
           <div class="card-action">
             ${type}
           </div></div></div>`;
-        document.getElementById('dataGrid').innerHTML = result;
+        if (typeOfSearch) {
+          document.getElementById('topMovies').innerHTML = result;
+        } else {
+          document.getElementById('topSeries').innerHTML = result;
+        }
       })
       .catch(error => {
         console.log('Error', error);
       });
   });
-  // drawData(topMoviesImdbID);
 };
 
-getMoviesTop();
+window.init = () =>{
+  const topMovies = ['tt1677720', 'tt4154756', 'tt5463162', 'tt3606756', 'tt1825683', 'tt5104604', 'tt5095030', 'tt6911608', 'tt5164214', 'tt4881806', 'tt4073790', 'tt6133466'];
+  const topSeries = ['tt5753856', 'tt0944947', 'tt4574334', 'tt1520211', 'tt4230076', 'tt2085059', 'tt3032476', 'tt0898266', 'tt6257970', 'tt8363140', 'tt7016936', 'tt6470478'];
+  drawMoviesAndSeriesTop(topMovies, true);
+  drawMoviesAndSeriesTop(topSeries, false);
+};
+
+
+window.cleanSearchResultElement = () =>{
+  document.getElementById('searchResult').innerHTML = '';
+};

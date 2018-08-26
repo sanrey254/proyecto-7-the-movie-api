@@ -43,7 +43,13 @@
                     </li>
                     <li><a class="dropdown-trigger blue-grey-text text-darken-4" data-target="dropdownColecciones">Sagas<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="#" class="blue-grey-text text-darken-4">Login</a></li>
+                    <li><a href="#" class="blue-grey-text text-darken-4 mr-3">Login</a></li>
+                </ul>
+            </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a id="movieTap" href="#topMovies" class="active" onclick="cleanSearchResultElement()">Top movies</a></li>
+                    <li class="tab"><a id="serieTap" href="#topSeries" onclick="cleanSearchResultElement()">Top Series</a></li>
                 </ul>
             </div>
         </nav>
@@ -65,8 +71,14 @@
         </ul>
     </header>
 
-    <section>
-        <div class="row mt-3" id="dataGrid"></div>
+    <section class="mt-3">
+        <div class="row mt-2" id="topMovies"></div>
+    </section>
+    <section class="mt-3">
+        <div class="row mt-2" id="topSeries"></div>
+    </section>
+    <section class="mt-3">
+        <div class="row mt-2" id="searchResult"></div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
@@ -76,6 +88,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             M.AutoInit();
         });
+        init();
     </script>
 </body>
 
