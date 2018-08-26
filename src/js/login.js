@@ -4,6 +4,11 @@ document.getElementById('loginModal').addEventListener('click', event => {
   const loginForm = `<section class="section section-login mb-0">
         <div class="valign-wrapper row login-box mb-0">
         <div class="col card card-no-border m12 mb-0">
+        <div class="card-image">
+        <div class="col offset-s1 s10">
+            <img class="login-img mx-auto" src="img/user-default.png">
+          </div>
+        </div>
             <div class="card-content">
                 <span class="card-title">Enter your login details</span>
                 <div class="row">
