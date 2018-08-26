@@ -43,16 +43,16 @@
                     </li>
                     <li><a class="dropdown-trigger blue-grey-text text-darken-4" data-target="dropdownColecciones">Sagas<i
                                 class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="#" class="blue-grey-text text-darken-4 mr-3">Sign out</a></li>
+                    <li><a id="sign-out" class="blue-grey-text text-darken-4 mr-3">Sign out</a></li>
                 </ul>
             </div>
             <div class="nav-content">
                 <ul class="tabs tabs-transparent">
-                    <li class="tab"><a id="movieTap" href="#topMovies" class="active" onclick="cleanSearchResultElement()">Top
+                    <li class="tab"><a id="movieTap" href="#topMovies" class=" lowerCase active" onclick="cleanSearchResultElement()">Top
                             movies</a></li>
-                    <li class="tab"><a id="serieTap" href="#topSeries" onclick="cleanSearchResultElement()">Top Series</a></li>
-                    <li class="tab"><a id="mySerieTap" href="#mySeries" onclick="cleanSearchResultElement()">My Series</a></li>
-                    <li class="tab"><a id="mymovieTap" href="#myMovies" onclick="cleanSearchResultElement()">My Movies</a></li>
+                    <li class="tab"><a id="serieTap" href="#topSeries" onclick="cleanSearchResultElement()" class="lowerCase">Top Series</a></li>
+                    <li class="tab"><a id="mySerieTap" href="#mySeries" onclick="cleanSearchResultElement()" class="lowerCase">My Series</a></li>
+                    <li class="tab"><a id="mymovieTap" href="#myMovies" onclick="cleanSearchResultElement()" class="lowerCase">My Movies</a></li>
                 </ul>
             </div>
         </nav>
@@ -70,7 +70,7 @@
                 </ul>
 
             </li>
-            <li class="sidenav-close"><a href="#">Sign out</a></li>
+            <li class="sidenav-close"><a id="sign-out">Sign out</a></li>
         </ul>
     </header>
 
@@ -94,6 +94,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <script src="../js/data.js"></script>
     <script src="../js/firebase.js"></script>
+    <script src="../js/userData.js"></script>
     <script>
         // Inicialización de componentes de Materialize
         document.addEventListener('DOMContentLoaded', () => {

@@ -14,6 +14,18 @@ nav ul a:hover{
 	background-color: #a5a2a2cc;
 }
 
+.facebook, .facebook:hover{
+	background-color: #3b5998;
+}
+
+.github, .github:hover{
+	background-color: #333;
+}
+
+.google, .google:hover{
+	background-color: #fbbc05;
+}
+
 .lowerCase{
 	text-transform: capitalize;
 }
@@ -44,6 +56,9 @@ nav ul a:hover{
     height: 400px;
 }
 
+.card-no-border{
+	box-shadow: inherit;
+}
 .img-card{
 	height: 100px;
 }
@@ -67,7 +82,7 @@ nav ul a:hover{
     opacity: 0.5;
 }
 
-input[type="text"]:not(.browser-default):focus:not([readonly]){
+input[type="text"]:not(.browser-default):focus:not([readonly]), input[type="password"]:not(.browser-default):focus:not([readonly]), input[type="email"]:not(.browser-default):focus:not([readonly]){
 	border-bottom: 1px solid #394847;
 	box-shadow: 0 1px 0 0 #1f2121;
 }

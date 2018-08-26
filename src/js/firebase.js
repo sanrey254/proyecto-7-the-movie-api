@@ -13,7 +13,7 @@ window.initializeFirebase = () => {
 window.loginWithEmailAndPassword = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
-      location.href = ('views/userView.html'); // es para redireccionar al muro
+      location.href = ('views/userView.html'); // es para redireccionar a la vista de usuario
     })
     .catch(error => {
       let errorCode = error.code;
@@ -55,6 +55,16 @@ window.loginWithFacebook = () => {
     // Crear un nuevo objeto para realizar la conexión con la API de Facebook
     const provider = new firebase.auth.FacebookAuthProvider();
     provider.addScope('public_profile');
+    getPopUpForAccount(provider);
+  } else {
+    firebase.auth().signOut();
+  }
+};
+
+window.loginWithGitHub = () => {
+  if (!firebase.auth().currentUser) {
+    const provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope('repo');
     getPopUpForAccount(provider);
   } else {
     firebase.auth().signOut();
@@ -128,7 +138,8 @@ window.createNewAccount = (email, password) => {
 window.signOut = () => {
   firebase.auth().signOut()
     .then(() => {
-      location.href('../index.html');
+      console.log('salio');
+      location.href = ('../index.html');
     }).catch(error => {
       console.log('Error', error);
     });
