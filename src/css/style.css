@@ -67,6 +67,10 @@ nav ul a:hover{
 	width: 50%!important;
 }
 
+.pointer{
+	cursor: pointer;
+}
+
 .no-radius{
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;

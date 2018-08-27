@@ -13,23 +13,23 @@ window.initializeFirebase = () => {
 window.loginWithEmailAndPassword = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
-      location.href = ('views/userView.html'); // es para redireccionar a la vista de usuario
+      location.href = ('userView.html'); // es para redireccionar a la vista de usuario
     })
     .catch(error => {
       let errorCode = error.code;
       if (errorCode === 'auth/wrong-password') {
         swal({
-          confirmButtonText: 'Aceptar',
+          confirmButtonText: 'Ok',
           type: 'error',
-          title: 'Contraseña inválida',
-          text: 'Inténtalo de nuevo'
+          title: 'Invalid password',
+          text: 'Try again'
         });
       } else if (errorCode === 'auth/user-not-found' || errorCode === 'auth/invalid-email') {
         swal({
           confirmButtonText: 'Aceptar',
           type: 'error',
-          title: 'Usuario inválido',
-          text: 'Inténtalo de nuevo'
+          title: 'Invalid email address',
+          text: 'Try again'
         });
       }
     });
@@ -74,16 +74,16 @@ window.loginWithGitHub = () => {
 window.getPopUpForAccount = (provider) => {
   firebase.auth().signInWithPopup(provider)
     .then(() => {
-      location.href = ('views/userView.html');
+      location.href = ('userView.html');
     // Errores en la conexión
     }).catch(error => {
       const errorCode = error.code;
       if (errorCode === 'auth/account-exists-with-different-credential') {
         swal({
-          confirmButtonText: 'Aceptar',
+          confirmButtonText: 'Ok',
           type: 'error',
-          title: 'Ya existe un usuario registrado con la dirección de correo proporcionada',
-          text: 'Inténtalo de nuevo'
+          title: 'Email address already in use',
+          text: 'Try again'
         });
       }
     });
@@ -95,14 +95,16 @@ window.createNewAccount = (email, password) => {
       const user = firebase.auth().currentUser;
       user.sendEmailVerification()
         .then(() => {
-          console.log('Correo enviado');
           swal({
-            confirmButtonText: 'Aceptar',
+            confirmButtonText: 'Ok',
             type: 'success',
-            title: 'Se ha enviado un enlace de verificación a tu cuenta de correo',
-            text: 'Sigue las instrucciones para ingresar a tu cuenta'
+            title: 'A verification email has been sent to your email address',
+            text: 'Follow the instructions'
+          }).then((result) => {
+            if (result.value) {
+              signOut();
+            }
           });
-          signOut();
         }).catch(error => {
           console.log('Error', error);
         });
@@ -111,24 +113,24 @@ window.createNewAccount = (email, password) => {
       let errorCode = error.code;
       if (errorCode === 'auth/invalid-email') {
         swal({
-          confirmButtonText: 'Aceptar',
+          confirmButtonText: 'Ok',
           type: 'error',
-          title: 'Dirección de correo inválida',
-          text: 'Inténtalo de nuevo'
+          title: 'Invalid email address',
+          text: 'Try again'
         });
       } else if (errorCode === 'auth/weak-password') {
         swal({
-          confirmButtonText: 'Aceptar',
+          confirmButtonText: 'Ok',
           type: 'error',
-          title: 'Contraseña inválida',
-          text: 'Inténtalo de nuevo'
+          title: 'Invalid password',
+          text: 'Try again'
         });
       } else if (errorCode === 'auth/email-already-in-use') {
         swal({
-          confirmButtonText: 'Aceptar',
+          confirmButtonText: 'Ok',
           type: 'error',
-          title: 'Ya existe un usuario registrado con la dirección de correo proporcionada',
-          text: 'Inténtalo de nuevo'
+          title: 'Email address already in use',
+          text: 'Try again'
         });
       }
     });
@@ -139,7 +141,7 @@ window.signOut = () => {
   firebase.auth().signOut()
     .then(() => {
       console.log('salio');
-      location.href = ('../index.html');
+      location.href = ('index.html');
     }).catch(error => {
       console.log('Error', error);
     });

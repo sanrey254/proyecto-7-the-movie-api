@@ -1,3 +1,5 @@
+initializeFirebase();
+let db = firebase.firestore();
 
 window.getData = (search, page) => {
   fetch(`https://www.omdbapi.com/?apikey=add73b1a&s=${search}&page=${page}`)
@@ -7,7 +9,9 @@ window.getData = (search, page) => {
     })
     .catch((error) => {
       console.log('Error', error);
-      document.getElementById('searchResult').innerHTML = '<div class="col offset-s4 s6"><img src="img/no-result.png" class="responsive-img mt-5"></div>';
+      document.getElementById('topMovies').style.display = 'none';
+      document.getElementById('topSeries').style.display = 'none';
+      document.getElementById('searchResult').innerHTML = '<div class="col offset-s4 s6"><img src="../img/no-result.png" class="responsive-img mt-5"></div>';
     });
 };
 
@@ -29,20 +33,20 @@ window.drawData = (dataArray) => {
   dataArray.forEach(data => {
     let type = getTypeBage(data.Type);
     if (data.Poster === 'N/A') {
-      poster = 'img/no-poster.jpg';
+      poster = '../img/no-poster.jpg';
     } else {
       poster = data.Poster;
     }
     result += `<div class="col offset-s1 s10 m6 l3"><div class="card">
           <div class="card-image">
             <img class="height-img" src="${poster}">
-            <a class="btn-floating halfway-fab waves-effect waves-light red" onclick="getDetails('${data.imdbID}')"><i class="material-icons">speaker_notes</i></a>
+            <a class="btn-floating halfway-fab waves-effect waves-light red" onclick="addToFavorites('${data.imdbID}')" title="Add to favorites"><i class="material-icons"> star</i></a>
           </div>
           <div class="card-content">
             <p><b>${data.Title}</b></p>
           </div>
           <div class="card-action">
-            ${type}
+            ${type}<a><span class="badge blue darken-4 white-text lowerCase pointer" onclick="getDetails('${data.imdbID}')"><i class="fas fa-info-circle"></i> Details</span></a>
           </div></div></div>`;
   });
   document.getElementById('topMovies').style.display = 'none';
@@ -78,7 +82,7 @@ window.getDetails = (imdbID) => {
 
 window.drawDataDetails = (dataArray) => {
   if (dataArray.Poster === 'N/A') {
-    poster = 'img/no-poster.jpg';
+    poster = '../img/no-poster.jpg';
   } else {
     poster = dataArray.Poster;
   }
@@ -97,7 +101,7 @@ window.drawDataDetails = (dataArray) => {
   </div></div></div>`;
   swal({
     html: card,
-    confirmButtonText: 'Cerrar',
+    confirmButtonText: 'Ok',
     confirmButtonColor: '#F44336',
     backdrop: 'rgba(24, 24, 36, 0.92)'
   });
@@ -105,31 +109,35 @@ window.drawDataDetails = (dataArray) => {
 
 window.drawMoviesAndSeriesTop = (topArray, typeOfSearch) => {
   let result = '';
-  topArray.forEach((element, i) => {
+  topArray.forEach(element => {
     fetch(`https://www.omdbapi.com/?apikey=add73b1a&i=${element}`)
       .then(response => response.json())
       .then(data => {
         let type = getTypeBage(data.Type);
         if (data.Poster === 'N/A') {
-          poster = 'img/no-poster.jpg';
+          poster = '../img/no-poster.jpg';
         } else {
           poster = data.Poster;
         }
         result += `<div class="col offset-s1 s10 m6 l3"><div class="card hoverable">
           <div class="card-image">
             <img class="height-img" src="${poster}">
-            <a class="btn-floating halfway-fab waves-effect waves-light red" onclick="getDetails('${data.imdbID}')"><i class="material-icons">speaker_notes</i></a>
+            <a class="btn-floating halfway-fab waves-effect waves-light red" onclick="addToFavorites('${data.imdbID}')" title="Add to favorites"><i class="material-icons"> star</i></a>
           </div>
           <div class="card-content">
             <p><b>${data.Title}</b></p>
           </div>
           <div class="card-action">
-            ${type}
+            ${type}<a><span class="badge blue darken-4 white-text lowerCase pointer" onclick="getDetails('${data.imdbID}')"><i class="fas fa-info-circle"></i> Details</span></a>
           </div></div></div>`;
-        if (typeOfSearch) {
+        if (typeOfSearch === 1) {
           document.getElementById('topMovies').innerHTML = result;
-        } else {
+        }
+        if (typeOfSearch === 2) {
           document.getElementById('topSeries').innerHTML = result;
+        }
+        if (typeOfSearch === 3) {
+          document.getElementById('myFavorites').innerHTML = result;
         }
       })
       .catch(error => {
@@ -138,14 +146,71 @@ window.drawMoviesAndSeriesTop = (topArray, typeOfSearch) => {
   });
 };
 
-window.init = () =>{
+window.init = () => {
   const topMovies = ['tt1677720', 'tt4154756', 'tt5463162', 'tt3606756', 'tt1825683', 'tt5104604', 'tt5095030', 'tt6911608', 'tt5164214', 'tt4881806', 'tt4073790', 'tt6133466'];
   const topSeries = ['tt5753856', 'tt0944947', 'tt4574334', 'tt1520211', 'tt4230076', 'tt2085059', 'tt3032476', 'tt0898266', 'tt6257970', 'tt8363140', 'tt7016936', 'tt6470478'];
-  drawMoviesAndSeriesTop(topMovies, true);
-  drawMoviesAndSeriesTop(topSeries, false);
+  drawMoviesAndSeriesTop(topMovies, 1);
+  drawMoviesAndSeriesTop(topSeries, 2);
 };
 
 
-window.cleanSearchResultElement = () =>{
+window.cleanSearchResultElement = () => {
   document.getElementById('searchResult').innerHTML = '';
+};
+
+
+window.checkElementID = (elementID, favorites) => {
+  const positionElementID = favorites.indexOf(elementID);
+  if (positionElementID === -1) {
+    return true;
+  } else {
+    return positionElementID;
+  }
+};
+
+window.addToFavorites = (id) => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      db.collection('users').get()
+        .then(response => {
+          response.forEach(element => {
+            if (user.uid === element.data().userID) {
+              let currentUserFavorites = element.data().favorites;
+              console.log(element.data().favorites);
+              
+              const checkUserFavorites = checkElementID(id, element.data().favorites);
+              if (checkUserFavorites === true) {
+                currentUserFavorites.push(`${id}`);
+                db.collection('users').doc(element.id).update({
+                  favorites: currentUserFavorites
+                }).then(() => {
+                  drawCurrentUserFavorites(element.id);
+                }).catch(() => {
+                  console.log('No agregado a favoritos');
+                });
+              } else {
+                currentUserFavorites.splice(checkUserFavorites, 1);
+                db.collection('users').doc(element.id).update({
+                  favorites: currentUserFavorites
+                }).then(() => {
+                  console.log('Quitado de favoritos');
+                  drawCurrentUserFavorites(element.id);
+                }).catch(() => {
+                  console.log('No quitado de favoritos');
+                });
+              }
+            }
+          });
+        });
+    } else {
+      swal({
+        confirmButtonText: 'Ok',
+        type: 'error',
+        title: 'You can´t add this to favorites',
+        text: 'You need to sign in or sign up before',
+        confirmButtonColor: '#F44336',
+        backdrop: 'rgba(24, 24, 36, 0.92)'
+      });
+    }
+  });
 };
